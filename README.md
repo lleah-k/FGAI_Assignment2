@@ -170,11 +170,11 @@ Total training time for all four models: 33 minutes.
 
 **Qualitative** (same prompts for all models)
 
-Text quality was measured on 18 samples of 50 words per model and temperature (3 prompts, 6 samples each) using:
-- **TTR / distinct-2**: unique words or bigrams over total (diversity)
+18 samples of 50 tokens (words and punctuation) per model and temperature (3 prompts, 6 samples each) using:
+- **TTR / distinct-2**: unique tokens or bigrams over total (diversity)
 - **rep-4**: share of 4-grams that repeat inside one sample (repetition)
 - **novel-4**: share of generated 4-grams that never appear in the training stories (low means copying, very high usually means word salad)
-- **sentence ends**: full stops, `!` and `?` per 50 words (whether it forms sentences)
+- **sentence ends**: full stops, `!` and `?` per 50 tokens (whether it forms sentences)
 - **keeps character**: share of samples that mention the prompt's main character again (Lily, Tom, the dog), a simple check of contextual consistency
 
 | | Simple RNN | BiRNN | LSTM | GRU |
@@ -216,7 +216,7 @@ Prompts: *"Once upon a time, there was a little girl named Lily. She"*, *"One da
 
 ![temperature effects](results/temperature_effects.png)
 
-**T = 0.3 (low).** Safe but loopy. Three of the models repeat about 10% of their 4-grams within 50 words, and only 5 to 7% of 4-grams are new, so the text is mostly stitched-together training phrases:
+**T = 0.3 (low).** Safe but loopy. Three of the models repeat about 10% of their 4-grams within 50 tokens, and only 5 to 7% of 4-grams are new, so the text is mostly stitched-together training phrases:
 > BiRNN: *"It was a big, red ball. It was a big, shiny rock. It was a big, shiny rock."*
 
 The GRU is the exception, with much less repetition (0.043) and sensible text: *"He lost his ball. He wanted to play with the ball, but he didn't know what to do."*
@@ -226,7 +226,7 @@ The GRU is the exception, with much less repetition (0.043) and sensible text: *
 
 **T = 1.0.** About half of the 4-grams are new. Some samples are still good (*"She looked everywhere, but she couldn't find it. She began to cry, but then she remembered her mom's warning."*, GRU), while others combine things that don't fit (*"Max was so happy he could move to the soft water on her hand"*, LSTM).
 
-**T = 1.3 (high).** Word salad. 71 to 81% of 4-grams are new, and sentences turn into long run-ons, so the number of sentence endings drops (BiRNN 3.8 per 50 words vs 5.7 at T = 0.3):
+**T = 1.3 (high).** Word salad. 71 to 81% of 4-grams are new, and sentences turn into long run-ons, so the number of sentence endings drops (BiRNN 3.8 per 50 tokens vs 5.7 at T = 0.3):
 > GRU: *"Mama brought peter make mama with those resist of them because parent were a yummy leak."*
 
 Raising the temperature increases diversity and removes repetition, but coherence falls apart. Lowering it gives fluent text that repeats itself and copies training phrases. The keeps-character score doesn't follow a clear trend with temperature, because character tracking is limited mainly by the 16-token window rather than by sampling. **T around 0.7** gives the best mix of fluent, varied and non-repetitive stories for this dataset.
