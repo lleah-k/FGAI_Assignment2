@@ -4,6 +4,8 @@ Comparing Simple RNN, Bidirectional RNN, LSTM and GRU for autoregressive word ge
 
 > Foundations of Generative AI (ICT4403), Assignment 2
 > K Liya, Reg. No. 230953118, Section F
+>
+> Repository: https://github.com/lleah-k/FGAI_Assignment2
 
 ---
 
@@ -101,8 +103,8 @@ Common structure: `Embedding(6147, 200) -> Dropout(0.25) -> recurrent layer (512
 
 ### Local machine (a CUDA GPU is strongly recommended)
 ```bash
-git clone https://github.com/<your-username>/tinystories-next-word-generation.git
-cd tinystories-next-word-generation
+git clone https://github.com/lleah-k/FGAI_Assignment2.git
+cd FGAI_Assignment2
 pip install -r requirements.txt
 jupyter notebook notebook/tinystories_textgen_rnn_lstm_gru.ipynb
 ```
@@ -113,7 +115,7 @@ Python 3.10 or newer, `torch`, `datasets`, `numpy`, `pandas`, `matplotlib`, `tab
 
 ### Files
 ```
-tinystories-next-word-generation/
+FGAI_Assignment2/
 ├── README.md
 ├── requirements.txt
 ├── notebook/
